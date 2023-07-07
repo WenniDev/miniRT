@@ -20,7 +20,8 @@ SRCS	=	$(SRCDIR)/main.c\
 			$(SRCDIR)/ray.c\
 			$(SRCDIR)/camera.c\
 			$(SRCDIR)/math/vector.c\
-			$(SRCDIR)/math/matrix.c\
+			$(SRCDIR)/math/matrix4.c\
+			$(SRCDIR)/math/matrix3.c\
 			$(SRCDIR)/objects/object.c\
 			$(SRCDIR)/objects/sphere.c\
 			$(SRCDIR)/objects/plane.c\
@@ -28,8 +29,12 @@ SRCS	=	$(SRCDIR)/main.c\
 			$(SRCDIR)/objects/cone.c\
 			$(SRCDIR)/lights/light.c\
 			$(SRCDIR)/lights/pointlight.c\
-			$(SRCDIR)/material.c\
-			$(SRCDIR)/simple_mat.c\
+			$(SRCDIR)/materials/material.c\
+			$(SRCDIR)/materials/simple_mat.c\
+			$(SRCDIR)/textures/textures.c\
+			$(SRCDIR)/textures/flat.c\
+			$(SRCDIR)/textures/checker.c\
+			$(SRCDIR)/textures/img.c\
 			$(SRCDIR)/gtfm.c\
 			$(SRCDIR)/clean.c
 HD		=	$(HDDIR)/miniRT.h\

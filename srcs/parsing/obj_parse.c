@@ -6,7 +6,7 @@
 /*   By: jopadova <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 17:47:51 by jopadova          #+#    #+#             */
-/*   Updated: 2023/07/10 14:29:57 by jopadova         ###   ########.fr       */
+/*   Updated: 2023/07/10 15:20:48 by jopadova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,131 +34,6 @@
 //{"cy", cylinder_create},
 //{"cn", cone_create}
 //};
-
-int	ft_isspace(int c)
-{
-	return (c == ' ' || (c >= '\t' && c <= '\r'));
-}
-
-double	ft_atof(const char *str)
-{
-	int		sign;
-	double	result;
-	double	factor;
-
-	sign = 1;
-	result = 0.0;
-	factor = 0.1;
-	while (ft_isspace(*str))
-		str++;
-	if (*str == '+' || *str == '-')
-		if (*str++ == '-')
-			sign = -1;
-	while (ft_isdigit(*str))
-		result = result * 10 + (*(str++) - '0');
-	if (*str == '.')
-	{
-		str++;
-		while (ft_isdigit(*str))
-		{
-			result += (*(str++) - '0') * factor;
-			factor *= 0.1;
-		}
-	}
-	return (result * sign);
-}
-
-void	ft_split_free(char **split)
-{
-	int	i;
-
-	i = 0;
-	while (split[i])
-	{
-		free(split[i]);
-		i++;
-	}
-	free(split);
-}
-
-int	ft_isdouble(char *str)
-{
-	if ((*str == '-' || *str == '+') && ft_isdigit(*(str + 1)))
-		str++;
-	while (*str && ft_isdigit(*str))
-		str++;
-	if (*str == '\0')
-		return (1);
-	else if (*str == '.' && ft_isdigit(*(++str)))
-	{
-		str++;
-		while (*str && ft_isdigit(*str))
-			str++;
-		if (*str == '\0')
-			return (1);
-		else
-			return (0);
-	}
-	else
-		return (0);
-}
-
-int	parse_double(char *data, void *value)
-{
-	double	*d;
-
-	d = (double *)value;
-	if (ft_isdouble(data) == 0)
-		return (FAILURE);
-	*d = ft_atof(data);
-	return (SUCCESS);
-}
-
-int	parse_vec(char *data, void *value)
-{
-	char	**split;
-	int		i;
-	t_vec *vec;
-
-	vec = (t_vec *)value;
-	i = 0;
-	split = ft_split(data, ",");
-	if (!split)
-		return (FAILURE);
-	while (split[i])
-		i++;
-	if (i != 3)
-		return (ft_split_free(split), FAILURE);
-	if (parse_double(split[0], &vec->x) == FAILURE)
-		return (ft_split_free(split), FAILURE);
-	if (parse_double(split[1], &vec->y) == FAILURE)
-		return (ft_split_free(split), FAILURE);
-	if (parse_double(split[2], &vec->z) == FAILURE)
-		return (ft_split_free(split), FAILURE);
-	return (ft_split_free(split), SUCCESS);
-}
-
-int	parse_color(char *data, void *value)
-{
-	t_vec	*rgb;
-
-	rgb = (t_vec *)value;
-	if (parse_vec(data, rgb) == FAILURE)
-		return (FAILURE);
-	if (rgb->x < 0 || rgb->x > 255)
-		return (FAILURE);
-	if (rgb->y < 0 || rgb->y > 255)
-		return (FAILURE);
-	if (rgb->z < 0 || rgb->z > 255)
-		return (FAILURE);
-	return (SUCCESS);
-}
-
-int parse_texture(char *data, void *value)
-{
-	printf("texture: %s\n", data);
-	return (SUCCESS);
-}
 
 //t_obj_parse get_function(char *obj)
 //{
@@ -327,7 +202,7 @@ int	parse_plane(char *data, t_scene *scene)
 		return (FAILURE);
 	while (split[i])
 		i++;
-	if (i != 4)
+	if (i != 5)
 		return (ft_split_free(split), FAILURE);
 	if (parse_vec(split[0], &plane.center) == FAILURE)
 		return (ft_split_free(split), FAILURE);
@@ -351,6 +226,7 @@ int	parse_plane(char *data, t_scene *scene)
 //	assign_material(new, floor_material);
 //	assign_texture(&new->material, checker1);
 	add_obj(&scene->obj_lst, new);
+	printf("%s\n", plane.texture);
 	return (ft_split_free(split), SUCCESS);
 }
 

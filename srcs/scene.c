@@ -1,9 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   scene.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jopadova <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/07/10 14:46:17 by jopadova          #+#    #+#             */
+/*   Updated: 2023/07/10 15:03:32 by jopadova         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "scene.h"
 #include "miniRT.h"
 
 #include <stdio.h>
 
-int	scene_render(t_scene *scene, t_img *img)
+int	scene_render(t_app *app, t_scene *scene, t_img *img)
 {
 	//Create some material
 	t_material	floor_material;
@@ -12,53 +24,61 @@ int	scene_render(t_scene *scene, t_img *img)
 	t_material	silver_metal;
 
 	//Set up the material
-	floor_material = simple_mat_const(vec_create(1.0, 1.0, 1.0), 0.5, 0.0);
+	floor_material = simple_mat_const(vec_create(1.0, 1.0, 1.0), 0.05, 0.0);
 	blue_diffuse = simple_mat_const(vec_create(0.2, 0.2, 0.8), 0.05, 5.0);
 	yellow_diffuse = simple_mat_const(vec_create(0.8, 0.8, 0.3), 0.05, 5.0);
 	silver_metal = simple_mat_const(vec_create(0.5, 0.5, 0.8), 0.5, 20.0);
 
+	(void)app;
 	//Create some textures
-	t_texture checker1 = create_checker_texture();
+//	t_texture	water;
+//	t_texture	checker1;
 
 	//Set up the texture
-	checker1.tfm = set_transform(vec_create(0.0, 0.0, 0.0), 0.0,
-								 vec_create(16.0, 16.0, 0.0));
+//	checker1 = create_checker_texture();
+//	checker1.tfm = set_transform(vec_create(0.0, 0.0, 0.0), 0.0,
+//								 vec_create(16.0, 16.0, 0.0));
+//	water = img_txt_create();
+//	water.tfm = set_transform(vec_create(0.0, 0.0, 0.0), 0.0,
+//							  vec_create(8.0, 8.0, 8.0));
+//	load_image(app, &water, "./imgs/water.xpm");
 
-    //Configure the camera
-    cam_init(&scene->cam);
+
+	//Configure the camera
+	cam_init(&scene->cam);
 	scene->cam.pos = vec_create(0.0, -10.0, -3.0);
 	scene->cam.look_at = vec_create(0.0, 0.0, 0.0);
 	scene->cam.up = vec_create(0.0, 0.0, 1.0);
 	scene->cam.size = 0.5;
 	scene->cam.ratio = 16.0 / 9.0;
-    cam_geometry(&scene->cam);
+	cam_geometry(&scene->cam);
 
 	//Create some objects
-	t_obj_lst	*floor;
-	t_obj_lst	*cylinder;
-	t_obj_lst	*cone;
-
-	floor = plane_create();
-	cylinder = cylinder_create();
-	cone = cone_create();
-
-	gtfm_set_transform(vec_create(0.0, 0.0, 1.0), vec_create(0.0, 0.0, 0.0),
-					   vec_create(16.0, 16.0, 1.0), &floor->gtfm);
-	assign_material(floor, floor_material);
-	assign_texture(&floor->material, checker1);
-
-	gtfm_set_transform(vec_create(-1.0, 0.0, 0.0), vec_create(-M_PI_4, 0.0, 0.0),
-					   vec_create(0.5, 0.5, 1.0), &cylinder->gtfm);
-	assign_material(cylinder, blue_diffuse);
-
-	gtfm_set_transform(vec_create(1.0, 0.0, 0.0), vec_create(M_PI_4, 0.0, 0.0),
-					   vec_create(0.5, 0.5, 1.0), &cone->gtfm);
-	assign_material(cone, yellow_diffuse);
-
-	//Add objects to the scene
-	add_obj(&scene->obj_lst, floor);
-	add_obj(&scene->obj_lst, cylinder);
-	add_obj(&scene->obj_lst, cone);
+//	t_obj_lst	*floor;
+//	t_obj_lst	*cylinder;
+//	t_obj_lst	*cone;
+//
+//	floor = plane_create();
+//	cylinder = cylinder_create();
+//	cone = cone_create();
+//
+//	gtfm_set_transform(vec_create(0.0, 0.0, 1.0), vec_create(0.0, 0.0, 0.0),
+//					   vec_create(16.0, 16.0, 1.0), &floor->gtfm);
+//	assign_material(floor, floor_material);
+//	assign_texture(&floor->material, water);
+//
+//	gtfm_set_transform(vec_create(-1.0, 0.0, 0.0), vec_create(-M_PI_4, 0.0, 0.0),
+//					   vec_create(0.5, 0.5, 1.0), &cylinder->gtfm);
+//	assign_material(cylinder, blue_diffuse);
+//
+//	gtfm_set_transform(vec_create(1.0, 0.0, 0.0), vec_create(M_PI_4, 0.0, 0.0),
+//					   vec_create(0.5, 0.5, 1.0), &cone->gtfm);
+//	assign_material(cone, yellow_diffuse);
+//
+//	//Add objects to the scene
+//	add_obj(&scene->obj_lst, floor);
+//	add_obj(&scene->obj_lst, cylinder);
+//	add_obj(&scene->obj_lst, cone);
 
 	//Create test lights
 	if (add_light(&scene->light_lst, POINT) == NULL)
@@ -80,27 +100,27 @@ int	scene_render(t_scene *scene, t_img *img)
 	light_lst_at(scene->light_lst, 2)->light.pos = vec_create(0.0, -10.0, -5.0);
 	light_lst_at(scene->light_lst, 2)->light.color = vec_create(0.0, 1.0, 0.0);
 
-    //Loop over every pixel
-    t_ray   	cam_ray;
-    double		xfact;
-    double		yfact;
-    double		xnorm;
-    double		ynorm;
+	//Loop over every pixel
+	t_ray   	cam_ray;
+	double		xfact;
+	double		yfact;
+	double		xnorm;
+	double		ynorm;
 
-    xfact = 1.0 / ((double) img->size_x / 2.0);
-    yfact = 1.0 / ((double) img->size_y / 2.0);
+	xfact = 1.0 / ((double) img->size_x / 2.0);
+	yfact = 1.0 / ((double) img->size_y / 2.0);
 
-    for (int y = 0; y < img->size_y; ++y)
-    {
-		printf("Processing row %d of %d\n", y + 1, img->size_y);
-        for (int x = 0; x < img->size_x; ++x)
-        {
-            //Normalize x and y coordinates
-            xnorm = (float) x * xfact - 1.0;
-            ynorm = (float) y * yfact - 1.0;
+	for (int y = 0; y < img->size_y; ++y)
+	{
+		printf("Processing row %d of %d\r\e[0K", y + 1, img->size_y);
+		for (int x = 0; x < img->size_x; ++x)
+		{
+			//Normalize x and y coordinates
+			xnorm = (float) x * xfact - 1.0;
+			ynorm = (float) y * yfact - 1.0;
 
-            //generate the ray
-            cam_ray = cam_generate_ray(&scene->cam, (float) xnorm, (float) ynorm);
+			//generate the ray
+			cam_ray = cam_generate_ray(&scene->cam, (float) xnorm, (float) ynorm);
 
 			//Loop on every object in the scene
 			t_poi	closest_poi;
@@ -119,7 +139,7 @@ int	scene_render(t_scene *scene, t_img *img)
 					//Use the material to compute the color
 					closest_poi.obj->material.ref_ray_count = 0;
 					rgb = spl_compute_color(scene->obj_lst, scene->light_lst,
-										closest_poi, cam_ray, closest_poi.obj->material);
+											closest_poi, cam_ray, closest_poi.obj->material);
 				}
 				else
 				{
@@ -129,8 +149,8 @@ int	scene_render(t_scene *scene, t_img *img)
 				}
 				img_store_color(img, x, y, rgb);
 			}
-        }
-    }
+		}
+	}
 	return (SUCCESS);
 }
 

@@ -21,6 +21,8 @@ SRCS	=	$(SRCDIR)/main.c\
 			$(SRCDIR)/app/mlx_image.c\
 			$(SRCDIR)/parsing/app_parse.c\
 			$(SRCDIR)/parsing/obj_parse.c\
+			$(SRCDIR)/parsing/elem_parse.c\
+			$(SRCDIR)/parsing/utils_parse.c\
 			$(SRCDIR)/scene.c\
 			$(SRCDIR)/ray.c\
 			$(SRCDIR)/camera.c\
@@ -39,15 +41,16 @@ SRCS	=	$(SRCDIR)/main.c\
 			$(SRCDIR)/textures/textures.c\
 			$(SRCDIR)/textures/flat.c\
 			$(SRCDIR)/textures/checker.c\
+			$(SRCDIR)/textures/img.c\
 			$(SRCDIR)/gtfm.c\
 			$(SRCDIR)/clean.c
 
 HD		=	$(HDDIR)/miniRT.h\
+			$(HDINC)/parsing.h\
 			$(HDDIR)/mlx_app.h\
 			$(HDINC)/scene.h\
 			$(HDINC)/ray.h\
-			$(HDINC)/vector.h\
-			$(HDINC)/app_parse.h
+			$(HDINC)/vector.h
 OBJS	=	$(patsubst $(SRCDIR)/%,$(OBJDIR)/%,$(SRCS:.c=.o))
 DEPS	=	$(patsubst $(SRCDIR)/%,$(OBJDIR)/%,$(SRCS:.c=.d))
 

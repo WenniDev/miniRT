@@ -6,7 +6,7 @@
 /*   By: jopadova <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 18:40:28 by jopadova          #+#    #+#             */
-/*   Updated: 2023/07/10 14:22:41 by jopadova         ###   ########.fr       */
+/*   Updated: 2023/07/10 17:23:49 by jopadova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,14 @@ typedef struct s_poi		t_poi;
 typedef struct s_obj_lst	t_obj_lst;
 
 /*********************OBJECT TYPES********************/
+
+typedef enum e_type
+{
+	Integer,
+	Float,
+	String,
+	Vector
+}e_type;
 
 //Struct to hold th plane data
 typedef struct s_plane

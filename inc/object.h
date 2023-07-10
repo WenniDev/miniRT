@@ -6,7 +6,7 @@
 /*   By: jopadova <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 18:40:28 by jopadova          #+#    #+#             */
-/*   Updated: 2023/07/10 07:15:34 by jopadova         ###   ########.fr       */
+/*   Updated: 2023/07/10 14:22:41 by jopadova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,9 @@ typedef struct s_plane
 {
 	t_vec	center;
 	t_vec	normal;
+	t_vec 	size;
 	t_vec	color;
+	char 	*texture;
 }t_plane;
 
 //Struct t hold the sphere data
@@ -45,6 +47,7 @@ typedef struct s_sphere
 	t_vec	center;
 	double	radius;
 	t_vec	color;
+	char 	*texture;
 }t_sphere;
 
 //Struct to hold the cylinder data
@@ -55,6 +58,7 @@ typedef struct s_cylinder
 	double	radius;
 	double	height;
 	t_vec	color;
+	char 	*texture;
 }t_cylinder;
 
 //Union to the object type

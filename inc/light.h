@@ -11,9 +11,9 @@
 
 typedef struct s_light
 {
+	double	intensity;
 	t_vec	color;
 	t_vec	pos;
-	double	intensity;
 	bool	(*illumfct)(t_vec *, t_vec *, t_vec *, double *, struct s_light,
 			t_obj_lst *, t_obj_lst *);
 }t_light;

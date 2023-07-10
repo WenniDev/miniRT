@@ -54,7 +54,7 @@ DEPS	=	$(patsubst $(SRCDIR)/%,$(OBJDIR)/%,$(SRCS:.c=.d))
 #*********COMPILER*********#
 
 CC		=	cc
-CFLAGS	=	-Wall -Wextra -Werror -g -fsanitize=address -Ofast
+CFLAGS	=	-Wall -Wextra -Werror -g3 -fsanitize=address
 HDINC	=	-I $(HDDIR) -I $(LIBDIR)/libft/inc -I $(LIBDIR)/mlx
 LIBINC	=	-lmlx -L $(LIBDIR)/mlx -lm -lXext -lX11
 

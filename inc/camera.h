@@ -6,7 +6,7 @@
 /*   By: jopadova <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 18:40:28 by jopadova          #+#    #+#             */
-/*   Updated: 2023/07/10 08:01:03 by jopadova         ###   ########.fr       */
+/*   Updated: 2023/07/10 12:18:17 by jopadova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,12 @@ typedef struct s_cam
 {
 	t_vec		pos;
 	t_vec		look_at;
+	double		ratio;
 	t_vec		up;
 	t_vec		align;
 	double		dist;
 	double		size;
-	double		ratio;
 	t_screen	scr;
-	bool		is_init;
 }t_cam;
 
 void	cam_init(t_cam *cam);

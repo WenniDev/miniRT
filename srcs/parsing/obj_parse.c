@@ -6,7 +6,7 @@
 /*   By: jopadova <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 17:47:51 by jopadova          #+#    #+#             */
-/*   Updated: 2023/07/10 08:18:02 by jopadova         ###   ########.fr       */
+/*   Updated: 2023/07/10 14:29:57 by jopadova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,25 @@
 #include "miniRT.h"
 #include "mlx_app.h"
 #include "parsing.h"
+#include "object.h"
 
 //static const t_obj_parse	g_parser[7] = {
-//{"A", {parse_double, parse_color}},
-//{"c", {parse_vec, parse_vec, parse_double}},
-//{"l", {parse_vec, parse_double, parse_color}},
-//{"sp", {parse_vec, parse_double, parse_color}},
-//{"pl", {parse_vec, parse_vec, parse_color}},
-//{"cy", {parse_vec, parse_vec, parse_double, parse_double, parse_color}}
+//{"A", {parse_double, parse_color, NULL}},
+//{"C", {parse_vec, parse_vec, parse_double, NULL}},
+//{"l", {parse_vec, parse_double, parse_color, NULL}},
+//{"sp", {parse_vec, parse_double, parse_color, NULL}},
+//{"pl", {parse_vec, parse_vec, parse_color, NULL}},
+//{"cy", {parse_vec, parse_vec, parse_double, parse_double, parse_color, NULL}}
+//};
+//
+//static const t_obj_create 	g_obj_create[4] = {
+////{"A", create_ambient},
+////{"C", create_camera},
+////{"l", create_light},
+//{"sp", sphere_create},
+//{"pl", plane_create},
+//{"cy", cylinder_create},
+//{"cn", cone_create}
 //};
 
 int	ft_isspace(int c)
@@ -143,6 +154,67 @@ int	parse_color(char *data, void *value)
 	return (SUCCESS);
 }
 
+int parse_texture(char *data, void *value)
+{
+	printf("texture: %s\n", data);
+	return (SUCCESS);
+}
+
+//t_obj_parse get_function(char *obj)
+//{
+//	int i;
+//
+//	i = 0;
+//	while (ft_strcmp(g_parser[i].data, obj) != 0)
+//		i++;
+//	return (g_parser[i]);
+//}
+//
+//int get_function_nb(t_obj_parse steps)
+//{
+//	int	i;
+//
+//	i = 0;
+//	while (steps.parse[i])
+//		i++;
+//	return (i);
+//}
+//
+//void	*get_object(char *type)
+//{
+//	int	i;
+//
+//	i = 0;
+//	while (ft_strcmp(g_obj_create[i].type, type) != 0)
+//		i++;
+//	return (g_obj_create[i].create());
+//}
+//
+//int parse_object(char *data, t_scene *scene)
+//{
+//	char		**split;
+//	int			i;
+//	t_obj_parse	steps;
+//
+//	i = 0;
+//	split = ft_split(data, " \t\r\n\v\f");
+//	if (!split)
+//		return (FAILURE);
+//	while (split[i])
+//		i++;
+//	steps = get_function(split[0]);
+//	if (i != get_function_nb(steps) + 1)
+//		return (FAILURE);
+//	i = 0;
+//	while (split[++i])
+//		get_object(split[0]));
+//		//		if (steps.parse[i - 1](split[i], (sizeof(steps.parse[i - 1]))&scene[i]) == FAILURE)
+//		//			return (FAILURE);
+//	(void)scene;
+//	printf("%s parsed\n", split[0]);
+//	return (SUCCESS);
+//}
+
 int	parse_ambient(char *data, t_scene *scene, bool *amb_init)
 {
 	char	**split;
@@ -166,8 +238,6 @@ int	parse_ambient(char *data, t_scene *scene, bool *amb_init)
 		return (ft_split_free(split), FAILURE);
 	if (parse_color(split[1], &light.color) == FAILURE)
 		return (ft_split_free(split), FAILURE);
-	printf("A ratio: %f\n", light.intensity);
-	printf("A color: %f, %f, %f\n", light.color.x, light.color.y, light.color.z);
 	(void)scene;
 	return (ft_split_free(split), SUCCESS);
 }
@@ -194,9 +264,6 @@ int	parse_camera(char *data, t_scene *scene, bool *cam_init)
 		return (ft_split_free(split), FAILURE);
 	if (parse_double(split[2], &scene->cam.size) == FAILURE)
 		return (ft_split_free(split), FAILURE);
-	printf("C pos: %f, %f, %f\n", scene->cam.pos.x, scene->cam.pos.y, scene->cam.pos.z);
-	printf("C dir: %f, %f, %f\n", scene->cam.look_at.x, scene->cam.look_at.y, scene->cam.look_at.z);
-	printf("C fov: %f\n", scene->cam.size);
 	return (ft_split_free(split), SUCCESS);
 }
 
@@ -220,9 +287,6 @@ int	parse_light(char *data, t_scene *scene)
 		return (ft_split_free(split), FAILURE);
 	if (parse_color(split[2], &light.color) == FAILURE)
 		return (ft_split_free(split), FAILURE);
-	printf("l pod: %f, %f, %f\n", light.pos.x, light.pos.y, light.pos.z);
-	printf("l intensity: %f\n", light.intensity);
-	printf("l color: %f, %f, %f\n", light.color.x, light.color.y, light.color.z);
 	(void)scene;
 	return (ft_split_free(split), SUCCESS);
 }
@@ -247,9 +311,6 @@ int	parse_sphere(char *data, t_scene *scene)
 		return (ft_split_free(split), FAILURE);
 	if (parse_color(split[2], &sphere.color) == FAILURE)
 		return (ft_split_free(split), FAILURE);
-	printf("sp center: %f, %f, %f\n", sphere.center.x, sphere.center.y, sphere.center.z);
-	printf("sp radius: %f\n", sphere.radius);
-	printf("sp color: %f, %f, %f\n", sphere.color.x, sphere.color.y, sphere.color.z);
 	(void)scene;
 	return (ft_split_free(split), SUCCESS);
 }
@@ -266,18 +327,30 @@ int	parse_plane(char *data, t_scene *scene)
 		return (FAILURE);
 	while (split[i])
 		i++;
-	if (i != 3)
+	if (i != 4)
 		return (ft_split_free(split), FAILURE);
 	if (parse_vec(split[0], &plane.center) == FAILURE)
 		return (ft_split_free(split), FAILURE);
 	if (parse_vec(split[1], &plane.normal) == FAILURE)
 		return (ft_split_free(split), FAILURE);
-	if (parse_color(split[2], &plane.color) == FAILURE)
+	if (parse_vec(split[2], &plane.size) == FAILURE)
 		return (ft_split_free(split), FAILURE);
-	printf("pl center: %f, %f, %f\n", plane.center.x, plane.center.y, plane.center.z);
-	printf("pl normal: %f, %f, %f\n", plane.normal.x, plane.normal.y, plane.normal.z);
-	printf("pl color: %f, %f, %f\n", plane.color.x, plane.color.y, plane.color.z);
-	(void)scene;
+	if (parse_color(split[3], &plane.color) == FAILURE)
+		return (ft_split_free(split), FAILURE);
+	if (parse_texture(split[4], &plane.texture) == FAILURE)
+		return (ft_split_free(split), FAILURE);
+
+	t_obj_lst *new = plane_create();
+//	t_material floor_material = simple_mat_const(vec_create(1.0, 1.0, 1.0), 0.5, 0.0);
+//	t_texture checker1 = create_checker_texture();
+
+//	checker1.tfm = set_transform(vec_create(0.0, 0.0, 0.0), 0.0, vec_create(16.0, 16.0, 0.0));
+	gtfm_set_transform(plane.center, plane.normal,
+					   plane.size, &new->gtfm);
+	new->color = plane.color;
+//	assign_material(new, floor_material);
+//	assign_texture(&new->material, checker1);
+	add_obj(&scene->obj_lst, new);
 	return (ft_split_free(split), SUCCESS);
 }
 
@@ -305,11 +378,6 @@ int	parse_cylinder(char *data, t_scene *scene)
 		return (ft_split_free(split), FAILURE);
 	if (parse_color(split[4], &cylinder.color) == FAILURE)
 		return (ft_split_free(split), FAILURE);
-	printf("cy center: %f, %f, %f\n", cylinder.center.x, cylinder.center.y, cylinder.center.z);
-	printf("cy normal: %f, %f, %f\n", cylinder.normal.x, cylinder.normal.y, cylinder.normal.z);
-	printf("cy radius: %f\n", cylinder.radius);
-	printf("cy height: %f\n", cylinder.height);
-	printf("cy color: %f, %f, %f\n", cylinder.color.x, cylinder.color.y, cylinder.color.z);
 	(void)scene;
 	return (ft_split_free(split), SUCCESS);
 }

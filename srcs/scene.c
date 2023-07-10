@@ -6,7 +6,7 @@
 /*   By: jopadova <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 18:40:28 by jopadova          #+#    #+#             */
-/*   Updated: 2023/07/10 06:08:33 by jopadova         ###   ########.fr       */
+/*   Updated: 2023/07/10 14:02:41 by jopadova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,31 +46,31 @@ int	scene_render(t_scene *scene, t_img *img)
     cam_geometry(&scene->cam);
 
 	//Create some objects
-	t_obj_lst	*floor;
-	t_obj_lst	*cylinder;
-	t_obj_lst	*cone;
-
-	floor = plane_create();
-	cylinder = cylinder_create();
-	cone = cone_create();
-
-	gtfm_set_transform(vec_create(0.0, 0.0, 1.0), vec_create(0.0, 0.0, 0.0),
-					   vec_create(16.0, 16.0, 1.0), &floor->gtfm);
-	assign_material(floor, floor_material);
-	assign_texture(&floor->material, checker1);
-
-	gtfm_set_transform(vec_create(-1.0, 0.0, 0.0), vec_create(-M_PI_4, 0.0, 0.0),
-					   vec_create(0.5, 0.5, 1.0), &cylinder->gtfm);
-	assign_material(cylinder, blue_diffuse);
-
-	gtfm_set_transform(vec_create(1.0, 0.0, 0.0), vec_create(M_PI_4, 0.0, 0.0),
-					   vec_create(0.5, 0.5, 1.0), &cone->gtfm);
-	assign_material(cone, yellow_diffuse);
+//	t_obj_lst	*floor;
+//	t_obj_lst	*cylinder;
+//	t_obj_lst	*cone;
+//
+//	floor = plane_create();
+//	cylinder = cylinder_create();
+//	cone = cone_create();
+//
+//	gtfm_set_transform(vec_create(0.0, 0.0, 1.0), vec_create(0.0, 0.0, 0.0),
+//					   vec_create(16.0, 16.0, 1.0), &floor->gtfm);
+//	assign_material(floor, floor_material);
+//	assign_texture(&floor->material, checker1);
+//
+//	gtfm_set_transform(vec_create(-1.0, 0.0, 0.0), vec_create(-M_PI_4, 0.0, 0.0),
+//					   vec_create(0.5, 0.5, 1.0), &cylinder->gtfm);
+//	assign_material(cylinder, blue_diffuse);
+//
+//	gtfm_set_transform(vec_create(1.0, 0.0, 0.0), vec_create(M_PI_4, 0.0, 0.0),
+//					   vec_create(0.5, 0.5, 1.0), &cone->gtfm);
+//	assign_material(cone, yellow_diffuse);
 
 	//Add objects to the scene
-	add_obj(&scene->obj_lst, floor);
-	add_obj(&scene->obj_lst, cylinder);
-	add_obj(&scene->obj_lst, cone);
+//	add_obj(&scene->obj_lst, floor);
+//	add_obj(&scene->obj_lst, cylinder);
+//	add_obj(&scene->obj_lst, cone);
 
 	//Create test lights
 	if (add_light(&scene->light_lst, POINT) == NULL)

@@ -1,7 +1,10 @@
 #*********PROJECT**********#
 
-PROJDIR	=	$(realpath $(CURDIR))
+PROJDIR	=	.
+#PROJDIR	=	$(realpath $(CURDIR))
+
 TARGET	=	miniRT
+
 LIBDIR	=	$(PROJDIR)/lib
 SRCDIR	=	$(PROJDIR)/srcs
 HDDIR	=	$(PROJDIR)/inc
@@ -16,6 +19,8 @@ SRCS	=	$(SRCDIR)/main.c\
 			$(SRCDIR)/app/mlx_app.c\
 			$(SRCDIR)/app/app_key_action.c\
 			$(SRCDIR)/app/mlx_image.c\
+			$(SRCDIR)/parsing/app_parse.c\
+			$(SRCDIR)/parsing/obj_parse.c\
 			$(SRCDIR)/scene.c\
 			$(SRCDIR)/ray.c\
 			$(SRCDIR)/camera.c\
@@ -34,14 +39,15 @@ SRCS	=	$(SRCDIR)/main.c\
 			$(SRCDIR)/textures/textures.c\
 			$(SRCDIR)/textures/flat.c\
 			$(SRCDIR)/textures/checker.c\
-			$(SRCDIR)/textures/img.c\
 			$(SRCDIR)/gtfm.c\
 			$(SRCDIR)/clean.c
+
 HD		=	$(HDDIR)/miniRT.h\
 			$(HDDIR)/mlx_app.h\
 			$(HDINC)/scene.h\
 			$(HDINC)/ray.h\
-			$(HDINC)/vector.h
+			$(HDINC)/vector.h\
+			$(HDINC)/app_parse.h
 OBJS	=	$(patsubst $(SRCDIR)/%,$(OBJDIR)/%,$(SRCS:.c=.o))
 DEPS	=	$(patsubst $(SRCDIR)/%,$(OBJDIR)/%,$(SRCS:.c=.d))
 
@@ -50,7 +56,7 @@ DEPS	=	$(patsubst $(SRCDIR)/%,$(OBJDIR)/%,$(SRCS:.c=.d))
 CC		=	cc
 CFLAGS	=	-Wall -Wextra -Werror -g -fsanitize=address -Ofast
 HDINC	=	-I $(HDDIR) -I $(LIBDIR)/libft/inc -I $(LIBDIR)/mlx
-LIBINC	=	-L $(LIBDIR)/mlx -lm -lmlx -lXext -lX11
+LIBINC	=	-lmlx -L $(LIBDIR)/mlx -lm -lXext -lX11
 
 #*********COLORS***********#
 

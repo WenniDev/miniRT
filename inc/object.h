@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   object.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jopadova <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/07/07 18:40:28 by jopadova          #+#    #+#             */
+/*   Updated: 2023/07/10 07:15:34 by jopadova         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef OBJECT_H
 # define OBJECT_H
 
@@ -22,14 +34,28 @@ typedef struct s_obj_lst	t_obj_lst;
 //Struct to hold th plane data
 typedef struct s_plane
 {
-
+	t_vec	center;
+	t_vec	normal;
+	t_vec	color;
 }t_plane;
 
 //Struct t hold the sphere data
 typedef struct s_sphere
 {
-
+	t_vec	center;
+	double	radius;
+	t_vec	color;
 }t_sphere;
+
+//Struct to hold the cylinder data
+typedef struct s_cylinder
+{
+	t_vec	center;
+	t_vec	normal;
+	double	radius;
+	double	height;
+	t_vec	color;
+}t_cylinder;
 
 //Union to the object type
 typedef union u_obj_type

@@ -1,9 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   texture.h                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jopadova <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/07/07 18:40:28 by jopadova          #+#    #+#             */
+/*   Updated: 2023/07/10 06:07:19 by jopadova         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef TEXTURE_H
 # define TEXTURE_H
 
 # include "matrix.h"
 # include "vector.h"
 # include "ray.h"
+# include "mlx_image.h"
 
 typedef struct s_texture
 {

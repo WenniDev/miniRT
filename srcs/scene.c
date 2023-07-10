@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   scene.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jopadova <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/07/07 18:40:28 by jopadova          #+#    #+#             */
+/*   Updated: 2023/07/10 06:08:33 by jopadova         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "scene.h"
 #include "miniRT.h"
 
@@ -9,13 +21,13 @@ int	scene_render(t_scene *scene, t_img *img)
 	t_material	floor_material;
 	t_material	blue_diffuse;
 	t_material	yellow_diffuse;
-	t_material	silver_metal;
+//	t_material	silver_metal;
 
 	//Set up the material
 	floor_material = simple_mat_const(vec_create(1.0, 1.0, 1.0), 0.5, 0.0);
 	blue_diffuse = simple_mat_const(vec_create(0.2, 0.2, 0.8), 0.05, 5.0);
 	yellow_diffuse = simple_mat_const(vec_create(0.8, 0.8, 0.3), 0.05, 5.0);
-	silver_metal = simple_mat_const(vec_create(0.5, 0.5, 0.8), 0.5, 20.0);
+//	silver_metal = simple_mat_const(vec_create(0.5, 0.5, 0.8), 0.5, 20.0);
 
 	//Create some textures
 	t_texture checker1 = create_checker_texture();

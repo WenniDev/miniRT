@@ -1,12 +1,24 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   mlx_app.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jopadova <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/07/07 16:07:33 by jopadova          #+#    #+#             */
+/*   Updated: 2023/07/10 06:06:38 by jopadova         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "mlx_app.h"
 #include "miniRT.h"
+#include "parsing.h"
 
 void	app_loop(t_app *app);
 void	app_event(t_app *app);
 
 int	app_init(t_app *app)
 {
-	ft_memset(app, 0, sizeof (t_app));
 	app->dsp_id = mlx_init();
 	if (app->dsp_id == NULL)
 	{
@@ -45,6 +57,10 @@ void	test_texture(t_img *img)
 
 int	app_execute(t_app *app)
 {
+	if (app_parse(app) == FAILURE)
+	{
+		return (FAILURE);
+	}
 	if (app_init(app) == FAILURE)
 	{
 		return (FAILURE);

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   material.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jopadova <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/07/07 18:40:28 by jopadova          #+#    #+#             */
+/*   Updated: 2023/07/10 06:09:53 by jopadova         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 # include "material.h"
 
 bool	cast_ray(t_ray cast_ray, t_poi *closest_poi, t_obj_lst *obj_lst, t_obj_lst *obj_cur);
@@ -84,7 +96,7 @@ t_vec	compute_ref_color(t_obj_lst *obj_lst, t_light_lst *light_lst,
 bool	cast_ray(t_ray cast_ray, t_poi *closest_poi, t_obj_lst *obj_lst, t_obj_lst *obj_cur)
 {
 	t_poi	poi;
-	bool	intersection;
+	bool	intersection = false;
 	bool	int_found;
 	double	dist;
 	double	min_dist;

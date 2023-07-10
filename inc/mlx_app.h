@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   mlx_app.h                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jopadova <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/07/07 16:07:33 by jopadova          #+#    #+#             */
+/*   Updated: 2023/07/07 16:52:19 by jopadova         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef MLX_APP_H
 # define MLX_APP_H
 
@@ -5,6 +17,7 @@
 # include "mlx_image.h"
 # include "scene.h"
 # include "camera.h"
+# include "parsing.h"
 # include <X11/keysym.h>
 
 # define SIZE_X	1280
@@ -14,6 +27,7 @@ typedef struct s_app
 {
 	void	*dsp_id;
 	void	*win_id;
+	t_parse parse;
     t_scene scene;
 	t_img	img;
 }t_app;

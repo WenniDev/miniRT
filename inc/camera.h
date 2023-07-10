@@ -1,8 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   camera.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jopadova <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/07/07 18:40:28 by jopadova          #+#    #+#             */
+/*   Updated: 2023/07/10 08:01:03 by jopadova         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef CAMERA_H
 # define CAMERA_H
 
 # include "ray.h"
 # include "vector.h"
+# include <stdbool.h>
 
 typedef struct s_sreen
 {
@@ -21,6 +34,7 @@ typedef struct s_cam
 	double		size;
 	double		ratio;
 	t_screen	scr;
+	bool		is_init;
 }t_cam;
 
 void	cam_init(t_cam *cam);

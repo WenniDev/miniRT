@@ -90,7 +90,47 @@ t_vec	mtx3_vec_mult(t_vec vec, t_mtx3 m)
 	return (res);
 }
 
-void	mtx_3identity(t_mtx3 *mtx)
+t_mtx3	mtx3_transpose(t_mtx3 mtx)
+{
+	t_mtx3	res;
+	int		l;
+	int		c;
+
+	l = 0;
+	while (l < 3)
+	{
+		c = 0;
+		while (c < 3)
+		{
+			res.val[l][c] = mtx.val[c][l];
+			c++;
+		}
+		l++;
+	}
+	return (res);
+}
+
+t_mtx3	mtx3_extract_linear(t_mtx4 mtx)
+{
+	t_mtx3	res;
+	int		l;
+	int		c;
+
+	l = 0;
+	while (l < 3)
+	{
+		c = 0;
+		while (c < 3)
+		{
+			res.val[l][c] = mtx.val[c][l];
+			c++;
+		}
+		l++;
+	}
+	return (res);
+}
+
+void	mtx3_identity(t_mtx3 *mtx)
 {
 	int l;
 	int c;
@@ -263,7 +303,7 @@ bool	mtx3_invert(t_mtx3 *mtx)
 	t_mtx3		left;
 	t_mtx3 		right;
 
-	mtx_3identity(&id_mtx);
+	mtx3_identity(&id_mtx);
 	tmp_mtx = join_mtx(*mtx, id_mtx);
 
 	int		crow;
@@ -280,6 +320,7 @@ bool	mtx3_invert(t_mtx3 *mtx)
 	double	mult_fact;
 	double	correc_fact;
 	bool	complete = false;
+	double	div;
 
 	while (complete == false && count < max_count)
 	{
@@ -296,7 +337,10 @@ bool	mtx3_invert(t_mtx3 *mtx)
 
 			if (tmp_mtx.val[crow][ccol] != 1)
 			{
-				mult_fact = 1.0 / tmp_mtx.val[crow][ccol];
+				div = tmp_mtx.val[crow][ccol];
+				if (div == 0.0)
+					div = 1.0;
+				mult_fact = 1.0 / div;
 				//printf("Mult row %d by %f\n", crow, mult_fact);
 				row_mult(&tmp_mtx, crow, mult_fact);
 			}
@@ -310,6 +354,8 @@ bool	mtx3_invert(t_mtx3 *mtx)
 
 					celem_val = tmp_mtx.val[row_index][ccol];
 					felem_val = tmp_mtx.val[row1_index][ccol];
+					if (felem_val == 0.0)
+						felem_val = 1.0;
 
 					if (!close_enough(felem_val, 0.0))
 					{
@@ -330,6 +376,8 @@ bool	mtx3_invert(t_mtx3 *mtx)
 
 					celem_val = tmp_mtx.val[crow][col_index];
 					felem_val = tmp_mtx.val[row1_index][col_index];
+					if (felem_val == 0.0)
+						felem_val = 1.0;
 
 					if (!close_enough(felem_val, 0.0))
 					{

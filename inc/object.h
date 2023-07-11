@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   object.h                                           :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: jopadova <marvin@42.fr>                    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/07 18:40:28 by jopadova          #+#    #+#             */
-/*   Updated: 2023/07/11 14:26:19 by jopadova         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #ifndef OBJECT_H
 # define OBJECT_H
 
@@ -28,18 +16,10 @@
 
 typedef struct s_poi		t_poi;
 typedef struct s_obj_lst	t_obj_lst;
+typedef struct s_light_lst	t_light_lst;
 
 /*********************OBJECT TYPES********************/
 
-typedef enum e_type
-{
-	Integer,
-	Float,
-	String,
-	Vector
-}e_type;
-
-//Struct to hold th plane data
 typedef struct s_plane
 {
 	t_vec	center;
@@ -47,6 +27,7 @@ typedef struct s_plane
 	t_vec 	size;
 	t_vec	color;
 	char 	*texture;
+
 }t_plane;
 
 //Struct t hold the sphere data
@@ -56,6 +37,7 @@ typedef struct s_sphere
 	double	radius;
 	t_vec	color;
 	char 	*texture;
+
 }t_sphere;
 
 //Struct to hold the cylinder data
@@ -69,31 +51,40 @@ typedef struct s_cylinder
 	char 	*texture;
 }t_cylinder;
 
+//Struct to hold the cone data
+typedef struct s_cone {
+	t_vec center;
+	t_vec normal;
+	double angle;
+	t_vec color;
+	char *texture;
+}t_cone;
 //Union to the object type
 typedef union u_obj_type
 {
 	t_sphere	sphere;
 	t_plane		plane;
+	t_cylinder	cylinder;
+	t_cone		cone;
 }t_obj_type;
 
 /*******************MATERIALS***********************/
-
-typedef struct s_simple_mat
-{
-	t_vec	color;
-	double	reflec;
-	double	shiny;
-}t_simple_mat;
 
 typedef struct s_material
 {
 	t_vec		color;
 	double		reflec;
 	double		shiny;
+	double		translucency;
+	double		ior;
 	int			max_ref_ray;
 	int			ref_ray_count;
 	t_texture	texture;
 	bool		has_texture;
+	t_vec		ambiant_color;
+	double		ambiant_intensity;
+	t_vec		(*colorfct)(t_obj_lst *, t_light_lst *,
+							 t_poi, t_ray, struct s_material);
 }t_material;
 
 /*******************OBJECT**************************/

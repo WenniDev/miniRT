@@ -20,9 +20,12 @@ SRCS	=	$(SRCDIR)/main.c\
 			$(SRCDIR)/app/app_key_action.c\
 			$(SRCDIR)/app/mlx_image.c\
 			$(SRCDIR)/parsing/app_parse.c\
-			$(SRCDIR)/parsing/obj_parse.c\
-			$(SRCDIR)/parsing/elem_parse.c\
+			$(SRCDIR)/parsing/data_parse.c\
 			$(SRCDIR)/parsing/utils_parse.c\
+			$(SRCDIR)/parsing/obj_parse.c\
+			$(SRCDIR)/parsing/obj_create.c\
+			$(SRCDIR)/parsing/scene_parse.c\
+			$(SRCDIR)/parsing/scene_create.c\
 			$(SRCDIR)/scene.c\
 			$(SRCDIR)/ray.c\
 			$(SRCDIR)/camera.c\
@@ -48,6 +51,7 @@ SRCS	=	$(SRCDIR)/main.c\
 
 HD		=	$(HDDIR)/miniRT.h\
 			$(HDINC)/parsing.h\
+			$(HDINC)/material.h\
 			$(HDDIR)/mlx_app.h\
 			$(HDINC)/scene.h\
 			$(HDINC)/ray.h\

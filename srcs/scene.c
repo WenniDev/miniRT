@@ -17,28 +17,28 @@ int	scene_render(t_app *app, t_scene *scene, t_img *img)
 //******************************************************************************
 //Configure the camera
 //******************************************************************************
-    cam_init(&scene->cam);
-	scene->cam.pos = vec_create(0.0, -10.0, -2.0);
-	scene->cam.look_at = vec_create(0.0, 0.0, 0.0);
-	scene->cam.up = vec_create(0.0, 0.0, 1.0);
-	scene->cam.size = 0.5;
-	scene->cam.ratio = 16.0 / 9.0;
-    cam_geometry(&scene->cam);
+//    cam_init(&scene->cam);
+//	scene->cam.pos = vec_create(0.0, -10.0, -2.0);
+//	scene->cam.look_at = vec_create(0.0, 0.0, 0.0);
+//	scene->cam.up = vec_create(0.0, 0.0, 1.0);
+//	scene->cam.size = 0.5;
+//	scene->cam.ratio = 16.0 / 9.0;
+//    cam_geometry(&scene->cam);
 
 //******************************************************************************
 //Create some objects
 //******************************************************************************
-	t_obj_lst	*plane;
-
-	plane = plane_create();
-	plane->gtfm = gtfm_set(vec_create(0.0, 0.0, 0.0),
-						   vec_create(M_PI_4, 0.0, 0.0),
-						   vec_create(1.0, 1.0, 1.0));
+//	t_obj_lst	*plane;
+//
+//	plane = plane_create();
+//	plane->gtfm = gtfm_set(vec_create(0.0, 0.0, 0.0),
+//						   vec_create(M_PI_4, 0.0, 0.0),
+//						   vec_create(1.0, 1.0, 1.0));
 
 //******************************************************************************
 //Add objects to the scene
 //******************************************************************************
-	add_obj(&scene->obj_lst, plane);
+//	add_obj(&scene->obj_lst, plane);
 
 //******************************************************************************
 //Create lights
@@ -64,7 +64,7 @@ int	scene_render(t_app *app, t_scene *scene, t_img *img)
 
     for (int y = 0; y < img->size_y; ++y)
     {
-		printf("Processing row %d of %d\r\033[0K", y + 1, img->size_y);
+//		printf("Processing row %d of %d\r\033[0K", y + 1, img->size_y);
         for (int x = 0; x < img->size_x; ++x)
         {
             //Normalize x and y coordinates
@@ -103,6 +103,7 @@ int	scene_render(t_app *app, t_scene *scene, t_img *img)
 			}
         }
     }
+	printf("Process complete\n");
 	return (SUCCESS);
 }
 

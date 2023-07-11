@@ -6,7 +6,7 @@
 /*   By: jopadova <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 16:42:35 by jopadova          #+#    #+#             */
-/*   Updated: 2023/07/10 13:45:49 by jopadova         ###   ########.fr       */
+/*   Updated: 2023/07/11 17:59:00 by jopadova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,45 +50,24 @@ int	is_separator(char c)
 	return ((c >= 9 && c <= 13) || c == ' ');
 }
 
-int is_object(char *data)
-{
-	if (data[0] == 'A' && is_separator(data[1]))
-		return (SUCCESS);
-	if (data[0] == 'C' && is_separator(data[1]))
-		return (SUCCESS);
-	if (data[0] == 'l' && is_separator(data[1]))
-		return (SUCCESS);
-	if (data[0] == 's' && data[1] == 'p' && is_separator(data[2]))
-		return (SUCCESS);
-	if (data[0] == 'p' && data[1] == 'l' && is_separator(data[2]))
-		return (SUCCESS);
-	if (data[0] == 's' && data[1] == 'q' && is_separator(data[2]))
-		return (SUCCESS);
-	if (data[0] == 'c' && data[1] == 'y' && is_separator(data[2]))
-		return (SUCCESS);
-	return (FAILURE);
-}
-
 int	parse_line(t_app *app, char *line, bool *cam_init, bool *amb_init)
 {
 	while (*line && is_separator(*line))
 		++line;
 	if (*line == '\0' || *line == '#')
 		return (SUCCESS);
-//	if (is_object(line) == SUCCESS)
-//		return (parse_object(line, &app->scene));
 	if (line[0] == 'A' && is_separator(line[1]))
-		return (parse_ambient(line + 1, &app->scene, amb_init));
+		return (parse_ambient(line + 1, app, amb_init));
 	if (line[0] == 'C' && is_separator(line[1]))
-		return (parse_camera(line + 1, &app->scene, cam_init));
+		return (parse_camera(line + 1, app, cam_init));
 	if (line[0] == 'l' && is_separator(line[1]))
-		return (parse_light(line + 1, &app->scene));
+		return (parse_light(line + 1, app));
 	if (line[0] == 's' && line[1] == 'p' && is_separator(line[2]))
-		return (parse_sphere(line + 2, &app->scene));
+		return (parse_sphere(line + 2, app));
 	if (line[0] == 'p' && line[1] == 'l' && is_separator(line[2]))
-		return (parse_plane(line + 2, &app->scene));
+		return (parse_plane(line + 2, app));
 	if (line[0] == 'c' && line[1] == 'y' && is_separator(line[2]))
-		return (parse_cylinder(line + 2, &app->scene));
+		return (parse_cylinder(line + 2, app));
 	return (print_error(line, "Unknown identifier"));
 }
 

@@ -15,6 +15,7 @@
 
 # include "matrix.h"
 # include "vector.h"
+# include "mlx_image.h"
 # include "ray.h"
 # include "mlx_image.h"
 

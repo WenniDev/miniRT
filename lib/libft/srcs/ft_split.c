@@ -6,7 +6,7 @@
 /*   By: rsabbah <rsabbah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 18:34:13 by rsabbah           #+#    #+#             */
-/*   Updated: 2023/02/10 12:26:31 by rsabbah          ###   ########.fr       */
+/*   Updated: 2023/07/10 05:53:58 by jopadova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ static char	**ft_filltab(char **tab, char const *s, char *sep, int wnb)
 		i++;
 		j += wlen;
 	}
-	tab[i] = '\0';
+	tab[i] = NULL;
 	return (tab);
 }
 

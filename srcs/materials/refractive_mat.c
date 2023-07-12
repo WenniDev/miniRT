@@ -140,7 +140,7 @@ static t_vec	compute_trans_color(t_obj_lst *obj_lst, t_light_lst *light_lst,
 		ref_ray2 = ray_create(vec_add(new_poi.point, vec_mult(ref_vec2, 0.01)),
 							  vec_add(new_poi.point, ref_vec2));
 
-		//Cast the ray into the scene
+		//Cast the ray into the scenes
 		int_found = cast_ray(ref_ray2, &closest_poi, obj_lst, poi.obj);
 		final_ray = ref_ray2;
 	}

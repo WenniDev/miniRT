@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   object.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jopadova <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/07/12 23:33:08 by jopadova          #+#    #+#             */
+/*   Updated: 2023/07/12 23:37:38 by jopadova         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef OBJECT_H
 # define OBJECT_H
 
@@ -7,6 +19,7 @@
 # include "libft.h"
 # include "matrix.h"
 # include "texture.h"
+# include "normal_map.h"
 # include <stdbool.h>
 
 # define SPHERE		0

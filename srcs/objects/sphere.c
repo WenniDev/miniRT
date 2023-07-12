@@ -98,7 +98,7 @@ bool	sphere_intersect(t_ray cam_ray, t_poi *poi, t_obj_lst *cur_obj)
 	if (!compute_intersection(tfm_ray, poi))
 		return (false);
 
-	//Compute the local normal
+	//Compute the local direc
 	poi->normal = apply_lin_tfm(cur_obj->gtfm, poi->point);
 	vec_normalize(&poi->normal);
 

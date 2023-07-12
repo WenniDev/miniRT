@@ -58,11 +58,11 @@ void	test_texture(t_app *app, t_img *img)
 
 int	app_execute(t_app *app)
 {
-	if (app_parse(app) == FAILURE)
+	if (app_init(app) == FAILURE)
 	{
 		return (FAILURE);
 	}
-	if (app_init(app) == FAILURE)
+	if (app_parse(app) == FAILURE)
 	{
 		return (FAILURE);
 	}

@@ -150,7 +150,7 @@ bool	cylinder_intersect(t_ray cast_ray, t_poi *poi, t_obj_lst *obj_cur)
 		//Transform the int point back to the world coordinates
 		poi->point = gtfm_vec_apply(obj_cur->gtfm, valid_intp, FWD);
 
-		//Compute the local normal
+		//Compute the local direc
 		t_vec	org_normal;
 		t_vec	new_normal;
 		t_vec	origin;
@@ -184,7 +184,7 @@ bool	cylinder_intersect(t_ray cast_ray, t_poi *poi, t_obj_lst *obj_cur)
 				//Transform back into world coordinate
 				poi->point = gtfm_vec_apply(obj_cur->gtfm, valid_intp, FWD);
 
-				//Compute the local normal
+				//Compute the local direc
 				t_vec	origin;
 				t_vec	new_origin;
 				t_vec	normal_vec;

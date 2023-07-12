@@ -12,7 +12,7 @@ int	obj_add_plane(t_plane *plane, t_scene *scene)
 	new = plane_create();
 	if (!new)
 		return (FAILURE);
-	new->gtfm = gtfm_set(plane->center, plane->normal, plane->size);
+	new->gtfm = gtfm_set(plane->center, plane->direc, plane->size);
 	new->color = plane->color;
 	add_obj(&scene->obj_lst, new);
 	return (SUCCESS);
@@ -38,7 +38,7 @@ int	obj_add_cylinder(t_cylinder *cylinder, t_scene *scene)
 	new = cylinder_create();
 	if (!new)
 		return (FAILURE);
-	new->gtfm = gtfm_set(cylinder->center, cylinder->normal, vec_create(cylinder->radius, cylinder->radius, cylinder->height));
+	new->gtfm = gtfm_set(cylinder->center, cylinder->direc, vec_create(cylinder->radius, cylinder->radius, cylinder->height));
 	new->color = cylinder->color;
 	add_obj(&scene->obj_lst, new);
 	return (SUCCESS);
@@ -51,7 +51,7 @@ int	obj_add_cone(t_cone *cone, t_scene *scene)
 	new = cone_create();
 	if (!new)
 		return (FAILURE);
-	new->gtfm = gtfm_set(cone->center, cone->normal, vec_create(cone->angle, cone->angle, cone->angle));
+	new->gtfm = gtfm_set(cone->center, cone->direc, vec_create(cone->radius, cone->radius, cone->height));
 	new->color = cone->color;
 	add_obj(&scene->obj_lst, new);
 	return (SUCCESS);

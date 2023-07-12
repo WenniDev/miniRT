@@ -23,7 +23,7 @@ typedef struct s_light_lst	t_light_lst;
 typedef struct s_plane
 {
 	t_vec	center;
-	t_vec	normal;
+	t_vec	direc;
 	t_vec 	size;
 	t_vec	color;
 	char 	*texture;
@@ -44,7 +44,7 @@ typedef struct s_sphere
 typedef struct s_cylinder
 {
 	t_vec	center;
-	t_vec	normal;
+	t_vec	direc;
 	double	radius;
 	double	height;
 	t_vec	color;
@@ -54,10 +54,10 @@ typedef struct s_cylinder
 //Struct to hold the cone data
 typedef struct s_cone {
 	t_vec center;
-	t_vec normal;
-	double angle;
+	t_vec direc;
+	double height;
+	double radius;
 	t_vec color;
-	char *texture;
 }t_cone;
 //Union to the object type
 typedef union u_obj_type
@@ -120,7 +120,7 @@ typedef struct s_intfct
 /********************FUNCTION DECLARATION***************/
 
 t_obj_lst	*add_obj(t_obj_lst **obj_lst, t_obj_lst *new);
-t_obj_lst	*obj_lst_at(t_obj_lst *obj_lst, int index);
+t_obj_lst	*get_last_obj(t_obj_lst *obj_lst);
 
 void		assign_texture(t_material *material, t_texture texture);
 

@@ -5,16 +5,17 @@
 #include "parsing.h"
 #include "miniRT.h"
 
-int	parse_ambient(char *data, t_app *app, bool *amb_init)
+int	parse_ambient(char *data, t_app *app)
 {
 	char	**split;
 	int		i;
 	t_light	light;
+	static bool	amb_init = false;
 
 	i = 0;
-	if (*amb_init == true)
+	if (amb_init == true)
 		return (FAILURE);
-	*amb_init = true;
+	amb_init = true;
 	split = ft_split(data, " \t\r\n\v\f");
 	if (!split)
 		return (FAILURE);
@@ -32,16 +33,17 @@ int	parse_ambient(char *data, t_app *app, bool *amb_init)
 	return (ft_split_free(split), SUCCESS);
 }
 
-int	parse_camera(char *data, t_app *app, bool *cam_init)
+int	parse_camera(char *data, t_app *app)
 {
 	char	**split;
 	int		i;
 	t_cam	cam;
+	static bool	cam_init = false;
 
 	i = 0;
-	if (*cam_init == true)
+	if (cam_init == true)
 		return (FAILURE);
-	*cam_init = true;
+	cam_init = true;
 	split = ft_split(data, " \t\r\n\v\f");
 	if (!split)
 		return (FAILURE);

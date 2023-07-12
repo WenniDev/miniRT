@@ -26,6 +26,8 @@ SRCS	=	$(SRCDIR)/main.c\
 			$(SRCDIR)/parsing/obj_create.c\
 			$(SRCDIR)/parsing/scene_parse.c\
 			$(SRCDIR)/parsing/scene_create.c\
+			$(SRCDIR)/parsing/mat_parse.c\
+			$(SRCDIR)/parsing/mat_create.c\
 			$(SRCDIR)/scene.c\
 			$(SRCDIR)/ray.c\
 			$(SRCDIR)/camera.c\

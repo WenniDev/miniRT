@@ -7,7 +7,7 @@ bool	point_illum(t_vec *point, t_vec *norm, t_vec *color, double *intensity,
 					t_light light, t_obj_lst *obj_lst, t_obj_lst *cur_obj)
 {
 	t_vec	lightdir; //Vector from the point to the light
-	double	angle; //angle between the normal and the light ray
+	double	angle; //angle between the direc and the light ray
 
 	lightdir = vec_sub(light.pos, *point);
 	vec_normalize(&lightdir);
@@ -50,10 +50,10 @@ bool	point_illum(t_vec *point, t_vec *norm, t_vec *color, double *intensity,
 	/*Only continue if the light ray didnt intersect with anything*/
 	if (!valid_int)
 	{
-		//Compute the angle between the normal amd the lightray
+		//Compute the angle between the direc amd the lightray
 		angle = acos(vec_dot(*norm, lightdir));
 
-		//If the normal is pointing away from the light then no illumination
+		//If the direc is pointing away from the light then no illumination
 		if (angle > M_PI_2)
 		{
 			//No illum

@@ -20,6 +20,7 @@ typedef struct s_light_lst	t_light_lst;
 
 /*********************OBJECT TYPES********************/
 
+//Struct to hold th plane data
 typedef struct s_plane
 {
 	t_vec	center;
@@ -64,27 +65,27 @@ typedef union u_obj_type
 {
 	t_sphere	sphere;
 	t_plane		plane;
-	t_cylinder	cylinder;
-	t_cone		cone;
 }t_obj_type;
 
 /*******************MATERIALS***********************/
 
 typedef struct s_material
 {
-	t_vec		color;
-	double		reflec;
-	double		shiny;
-	double		translucency;
-	double		ior;
-	int			max_ref_ray;
-	int			ref_ray_count;
-	t_texture	texture;
-	bool		has_texture;
-	t_vec		ambiant_color;
-	double		ambiant_intensity;
-	t_vec		(*colorfct)(t_obj_lst *, t_light_lst *,
-							 t_poi, t_ray, struct s_material);
+	t_vec			color;
+	double			reflec;
+	double			shiny;
+	double			translucency;
+	double			ior;
+	int				max_ref_ray;
+	int				ref_ray_count;
+	t_texture		texture;
+	bool			has_texture;
+	t_vec			ambiant_color;
+	double			ambiant_intensity;
+	t_vec			(*colorfct)(t_obj_lst *, t_light_lst *,
+				t_poi, t_ray, struct s_material);
+	t_normal_map	normal_map;
+	bool			has_normal_map;
 }t_material;
 
 /*******************OBJECT**************************/

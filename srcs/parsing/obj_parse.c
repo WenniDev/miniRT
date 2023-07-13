@@ -6,7 +6,7 @@
 /*   By: jopadova <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 17:47:51 by jopadova          #+#    #+#             */
-/*   Updated: 2023/07/12 15:23:37 by jopadova         ###   ########.fr       */
+/*   Updated: 2023/07/11 18:35:10 by jopadova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,15 +51,17 @@ int	parse_plane(char *data, t_app *app)
 		return (FAILURE);
 	while (split[i])
 		i++;
-	if (i != 4)
+	if (i != 5)
 		return (ft_split_free(split), FAILURE);
 	if (parse_vec(split[0], &plane.center) == FAILURE)
 		return (ft_split_free(split), FAILURE);
-	if (parse_vec(split[1], &plane.direc) == FAILURE)
+	if (parse_vec(split[1], &plane.normal) == FAILURE)
 		return (ft_split_free(split), FAILURE);
 	if (parse_vec(split[2], &plane.size) == FAILURE)
 		return (ft_split_free(split), FAILURE);
 	if (parse_color(split[3], &plane.color) == FAILURE)
+		return (ft_split_free(split), FAILURE);
+	if (parse_texture(split[4], &plane.texture) == FAILURE)
 		return (ft_split_free(split), FAILURE);
 	if (obj_add_plane(&plane, &app->scene) == FAILURE)
 		return (ft_split_free(split), FAILURE);
@@ -82,7 +84,7 @@ int	parse_cylinder(char *data, t_app *app)
 		return (ft_split_free(split), FAILURE);
 	if (parse_vec(split[0], &cylinder.center) == FAILURE)
 		return (ft_split_free(split), FAILURE);
-	if (parse_vec(split[1], &cylinder.direc) == FAILURE)
+	if (parse_vec(split[1], &cylinder.normal) == FAILURE)
 		return (ft_split_free(split), FAILURE);
 	if (parse_double(split[2], &cylinder.radius) == FAILURE)
 		return (ft_split_free(split), FAILURE);
@@ -95,31 +97,3 @@ int	parse_cylinder(char *data, t_app *app)
 	return (ft_split_free(split), SUCCESS);
 }
 
-int parse_cone(char *data, t_app *app)
-{
-	char **split;
-	int i;
-	t_cone cone;
-
-	i = 0;
-	split = ft_split(data, " \t\r\n\v\f");
-	if (!split)
-		return (FAILURE);
-	while (split[i])
-		i++;
-	if (i != 5)
-		return (ft_split_free(split), FAILURE);
-	if (parse_vec(split[0], &cone.center) == FAILURE)
-		return (ft_split_free(split), FAILURE);
-	if (parse_vec(split[1], &cone.direc) == FAILURE)
-		return (ft_split_free(split), FAILURE);
-	if (parse_double(split[2], &cone.radius) == FAILURE)
-		return (ft_split_free(split), FAILURE);
-	if (parse_double(split[3], &cone.height) == FAILURE)
-		return (ft_split_free(split), FAILURE);
-	if (parse_color(split[4], &cone.color) == FAILURE)
-		return (ft_split_free(split), FAILURE);
-	if (obj_add_cone(&cone, &app->scene) == FAILURE)
-		return (ft_split_free(split), FAILURE);
-	return (ft_split_free(split), SUCCESS);
-}

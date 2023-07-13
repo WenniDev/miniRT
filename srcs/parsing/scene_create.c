@@ -17,4 +17,3 @@ void	scene_set_camera(t_cam *cam, t_scene *scene)
 }
 
 int	scene_add_light(t_light *light, t_scene *scene);
-int	scene_add_ambiant(t_light *light, t_scene *scene);

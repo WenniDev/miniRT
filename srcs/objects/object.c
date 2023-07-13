@@ -7,12 +7,19 @@ void	set_gtfm(t_obj_lst *obj,t_gtfm gtfm)
 	obj->gtfm = gtfm;
 }
 
-t_obj_lst	*get_last_obj(t_obj_lst *obj_lst)
+t_obj_lst	*obj_lst_at(t_obj_lst *obj_lst, int index)
 {
 	if (obj_lst == NULL)
+	{
 		return (NULL);
-	while (obj_lst->next != NULL)
+	}
+	while (obj_lst != NULL)
+	{
+		if (index == 0)
+			break ;
+		--index;
 		obj_lst = obj_lst->next;
+	}
 	return (obj_lst);
 }
 

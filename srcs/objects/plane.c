@@ -70,7 +70,7 @@ bool	plane_intersect(t_ray cam_ray, t_poi *poi, t_obj_lst *cur_obj)
 	//Transform the poi back to the world coordinates
 	poi->point = gtfm_vec_apply(cur_obj->gtfm, poi->point, FWD);
 
-	//Compute the direc
+	//Compute the normal
 	origin = vec_create(0.0, 0.0, 0.0);
 	normal_vec = vec_create(0.0, 0.0, -1.0);
 	new_origin = gtfm_vec_apply(cur_obj->gtfm, origin, FWD);

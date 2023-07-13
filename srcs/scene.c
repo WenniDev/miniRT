@@ -45,25 +45,14 @@ int	scene_render(t_app *app, t_scene *scene, t_img *img)
 //******************************************************************************
 	if (add_light(&scene->light_lst, POINT) == NULL)
 		return (FAILURE);
-	scene->light_lst->light.pos = vec_create(-10.0, 0.0, -5.0);
+	scene->light_lst->light.pos = vec_create(0.0, -10.0, -5.0);
 	scene->light_lst->light.color = vec_create(1.0, 1.0, 1.0);
-
 	if (add_light(&scene->light_lst, POINT) == NULL)
 		return (FAILURE);
-	light_lst_at(scene->light_lst, 1)->light.pos = vec_create(10.0, 0.0, -5.0);
+	light_lst_at(scene->light_lst, 1)->light.pos = vec_create(0.0, 10.0, -5.0);
 	light_lst_at(scene->light_lst, 1)->light.color = vec_create(1.0, 1.0, 1.0);
 
-	if (add_light(&scene->light_lst, POINT) == NULL)
-		return (FAILURE);
-	light_lst_at(scene->light_lst, 2)->light.pos = vec_create(0.0, -10.0, 0.0);
-	light_lst_at(scene->light_lst, 2)->light.color = vec_create(1.0, 1.0, 1.0);
-
-	if (add_light(&scene->light_lst, POINT) == NULL)
-		return (FAILURE);
-	light_lst_at(scene->light_lst, 3)->light.pos = vec_create(0.0, 10.0, 0.0);
-	light_lst_at(scene->light_lst, 3)->light.color = vec_create(1.0, 1.0, 1.0);
-
-	//Loop over every pixel
+    //Loop over every pixel
     t_ray   	cam_ray;
     double		xfact;
     double		yfact;

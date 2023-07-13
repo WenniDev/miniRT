@@ -19,7 +19,7 @@ t_material	refractive_mat_const(t_vec color, double ref, double shiny,
 	mat.has_texture = false;
 	mat.colorfct = ref_compute_color;
 	mat.ambiant_color = vec_create(1.0, 1.0, 1.0);
-	mat.ambiant_intensity = 0.2;
+	mat.ambiant_intensity = 0.0;
 	return (mat);
 }
 
@@ -102,12 +102,16 @@ static t_vec	compute_trans_color(t_obj_lst *obj_lst, t_light_lst *light_lst,
 	//Test for secondery intersection with this object
 	t_poi	closest_poi;
 	t_poi	new_poi;
-	bool	test;
+	bool	test = false;
 	bool	int_found = false;
 	t_ray	final_ray;
 
-	test = poi.obj->intfct(ref_ray, &new_poi, poi.obj);
-	if (test)
+	//Test for intersection with possible objects inside the current one
+	int_found = cast_ray(ref_ray, &closest_poi, obj_lst, poi.obj);
+
+	if (!int_found)
+		test = poi.obj->intfct(ref_ray, &new_poi, poi.obj);
+	if (!int_found && test)
 	{
 		//printf("secondary interserct\n");
 		//Compute the refracted vector
@@ -136,11 +140,11 @@ static t_vec	compute_trans_color(t_obj_lst *obj_lst, t_light_lst *light_lst,
 		ref_ray2 = ray_create(vec_add(new_poi.point, vec_mult(ref_vec2, 0.01)),
 							  vec_add(new_poi.point, ref_vec2));
 
-		//Cast the ray into the scene
+		//Cast the ray into the scenes
 		int_found = cast_ray(ref_ray2, &closest_poi, obj_lst, poi.obj);
 		final_ray = ref_ray2;
 	}
-	else
+	else if (!test)
 	{
 		//No secondary intersection
 		int_found = cast_ray(ref_ray, &closest_poi, obj_lst, poi.obj);

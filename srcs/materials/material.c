@@ -39,9 +39,9 @@ t_vec	compute_diffuse_color(t_obj_lst *obj_lst, t_light_lst *light_lst,
 	else
 	{
 		//The ambiant conditions
-		diff_color.x = poi.obj->material.ambiant_color.x * poi.obj->material.ambiant_intensity;
-		diff_color.y = poi.obj->material.ambiant_color.y * poi.obj->material.ambiant_intensity;
-		diff_color.z = poi.obj->material.ambiant_color.z * poi.obj->material.ambiant_intensity;
+		diff_color.x = poi.obj->material.ambiant_color.x * poi.obj->material.ambiant_intensity * base_color.x;
+		diff_color.y = poi.obj->material.ambiant_color.y * poi.obj->material.ambiant_intensity * base_color.y;
+		diff_color.z = poi.obj->material.ambiant_color.z * poi.obj->material.ambiant_intensity * base_color.z;
 	}
 	return (diff_color);
 }
@@ -58,7 +58,7 @@ t_vec	compute_ref_color(t_obj_lst *obj_lst, t_light_lst *light_lst,
 	//Construct the reflection ray
 	t_ray	ref_ray = ray_create(poi.point, vec_add(poi.point, ref_vector));
 
-	//Cast this ray into the scene and find the closest object it intersect with
+	//Cast this ray into the scenes and find the closest object it intersect with
 	t_poi	closest_poi;
 	bool	int_found = cast_ray(ref_ray, &closest_poi, obj_lst, poi.obj);
 
@@ -93,7 +93,7 @@ t_vec	compute_spec_color(t_obj_lst *obj_lst, t_light_lst *light_lst,
 	t_vec	rgb = vec_create(0.0, 0.0, 0.0);
 	while (light_lst != NULL)
 	{
-		//Check for intersect with all objects in the scene
+		//Check for intersect with all objects in the scenes
 		double	intensity = 0.0;
 
 		//Construct a vector pointing from the poi to the light

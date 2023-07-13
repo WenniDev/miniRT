@@ -1,18 +1,29 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   material.h                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jopadova <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/07/12 23:33:08 by jopadova          #+#    #+#             */
+/*   Updated: 2023/07/12 23:39:21 by jopadova         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef MATERIAL_H
 # define MATERIAL_H
 
 # include "vector.h"
 # include "ray.h"
 # include "light.h"
-
-# define NONE	0
-# define SIMPLE 1
+# include "normal_map.h"
 
 t_material	simple_mat_const(t_vec color, double ref, double shiny);
 t_material	refractive_mat_const(t_vec color, double ref, double shiny,
 								   double trans);
 
 void	assign_material(t_obj_lst *obj, t_material material);
+void	assign_normal_map(t_material *mat, t_normal_map map);
 
 t_vec	spl_compute_color(t_obj_lst *obj_lst, t_light_lst *light_lst, t_poi poi,
 						   t_ray cam_ray, t_material mat);

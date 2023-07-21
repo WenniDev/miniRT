@@ -83,6 +83,7 @@ int	parse_line(t_app *app, char *line)
 int	parse_file(t_app *app)
 {
 	char	*line;
+	int		close_fd;
 
 	line = "";
 	while (line)
@@ -91,6 +92,11 @@ int	parse_file(t_app *app)
 		if (line && parse_line(app, line) == FAILURE)
 		{
 			free(line);
+			close_fd = open("/dev/null", O_RDONLY);
+			if (close_fd == -1)
+				return (FAILURE);
+			get_next_line(close_fd);
+			close(close_fd);
 			return (FAILURE);
 		}
 		free(line);
@@ -103,7 +109,8 @@ int	app_parse(t_app *app)
 	if (check_args(&app->parse) == FAILURE)
 		return (FAILURE);
 	if (parse_file(app) == FAILURE)
-		return (FAILURE);
+		return (close(app->parse.fd), FAILURE);
+	close(app->parse.fd);
 	printf("Parsing success\n");
 	return (SUCCESS);
 }

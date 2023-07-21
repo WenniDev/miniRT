@@ -1,0 +1,128 @@
+#*********PROJECT**********#
+
+PROJDIR	=	$(realpath $(CURDIR))
+TARGET	=	miniRT
+LIBDIR	=	$(PROJDIR)/lib
+SRCDIR	=	$(PROJDIR)/srcs
+HDDIR	=	$(PROJDIR)/inc
+OBJDIR	=	$(PROJDIR)/objs
+DEPDIR	=	$(PROJDIR)/deps
+
+#*********FILES************#
+
+LIBFT	=	$(LIBDIR)/libft/libft.a
+LIBMLX	=	$(LIBDIR)/mlx/libmlx.a
+SRCS	=	$(SRCDIR)/main.c\
+			$(SRCDIR)/app/mlx_app.c\
+			$(SRCDIR)/app/app_key_action.c\
+			$(SRCDIR)/app/mlx_image.c\
+			$(SRCDIR)/app/mlx_colors.c\
+			$(SRCDIR)/scene.c\
+			$(SRCDIR)/ray.c\
+			$(SRCDIR)/camera.c\
+			$(SRCDIR)/math/vector.c\
+			$(SRCDIR)/math/vector2.c\
+			$(SRCDIR)/math/matrix4_utils.c\
+			$(SRCDIR)/math/matrix4_invert.c\
+			$(SRCDIR)/math/matrix4_utils2.c\
+			$(SRCDIR)/math/matrix4_utils3.c\
+			$(SRCDIR)/math/matrix3_utils.c\
+			$(SRCDIR)/objects/object.c\
+			$(SRCDIR)/objects/sphere.c\
+			$(SRCDIR)/objects/plane.c\
+			$(SRCDIR)/objects/cylinder.c\
+			$(SRCDIR)/objects/cylinder_utils.c\
+			$(SRCDIR)/objects/cone.c\
+			$(SRCDIR)/objects/cone_utils.c\
+			$(SRCDIR)/parsing/app_parse.c\
+			$(SRCDIR)/parsing/data_parse.c\
+			$(SRCDIR)/parsing/utils_parse.c\
+			$(SRCDIR)/parsing/parse_error.c\
+			$(SRCDIR)/parsing/objects/obj_init.c\
+			$(SRCDIR)/parsing/objects/obj_parse.c\
+			$(SRCDIR)/parsing/objects/obj_create.c\
+			$(SRCDIR)/parsing/scene/scene_parse.c\
+			$(SRCDIR)/parsing/scene/scene_create.c\
+			$(SRCDIR)/parsing/materials/mat_parse.c\
+			$(SRCDIR)/parsing/materials/mat_create.c\
+			$(SRCDIR)/lights/light.c\
+			$(SRCDIR)/lights/illumination.c\
+			$(SRCDIR)/materials/material.c\
+			$(SRCDIR)/materials/simple_mat.c\
+			$(SRCDIR)/materials/refractive_mat.c\
+			$(SRCDIR)/materials/diff_color.c\
+			$(SRCDIR)/materials/ref_color.c\
+			$(SRCDIR)/materials/spec_color.c\
+			$(SRCDIR)/textures/textures.c\
+			$(SRCDIR)/textures/flat.c\
+			$(SRCDIR)/textures/checker.c\
+			$(SRCDIR)/textures/img.c\
+			$(SRCDIR)/normal_map.c\
+			$(SRCDIR)/nmap_img.c\
+			$(SRCDIR)/gtfm.c\
+			$(SRCDIR)/gtfm_mtx.c\
+			$(SRCDIR)/clean.c
+HD		=	$(HDDIR)/miniRT.h\
+			$(HDDIR)/mlx_app.h\
+			$(HDDIR)/parsing.h\
+			$(HDINC)/scene.h\
+			$(HDINC)/ray.h\
+			$(HDINC)/vector.h
+OBJS	=	$(patsubst $(SRCDIR)/%,$(OBJDIR)/%,$(SRCS:.c=.o))
+DEPS	=	$(patsubst $(SRCDIR)/%,$(OBJDIR)/%,$(SRCS:.c=.d))
+
+#*********COMPILER*********#
+
+CC		=	cc
+CFLAGS	=	-Wall -Wextra -Werror -g3 #-fsanitize=address -Ofast
+HDINC	=	-I $(HDDIR) -I $(LIBDIR)/libft/inc -I $(LIBDIR)/mlx
+LIBINC	=	-L $(LIBDIR)/mlx -lm -lmlx -lXext -lX11
+
+#*********COLORS***********#
+
+GREEN	=	\e[32m
+BLUE	=	\e[34m
+NC		=	\e[0m
+
+#*********RULES************#
+
+all : $(TARGET)
+
+$(TARGET) : $(LIBFT) $(OBJS)
+	@printf "$(GREEN)Build complete\n$(NC)"
+	@printf "Linking $(BLUE)$@\n$(NC)"
+	@$(CC) $(CFLAGS) $(OBJS) $(LIBFT) -o $@ $(LIBINC)
+	@printf "$(GREEN)Done\n$(NC)"
+
+$(LIBFT) :
+	@printf "Compiling $(notdir $@)\n"
+	@make -s -C $(LIBDIR)/libft/
+	@printf "$(GREEN)Done\n$(NC)"
+
+$(OBJDIR)/%.o : $(SRCDIR)/%.c
+	@mkdir -p $(dir $@)
+	@mkdir -p $(patsubst $(OBJDIR)/%,$(DEPDIR)/%,$(dir $@))
+	@printf "Building $(BLUE)$(notdir $@)\n$(NC)"
+	@$(CC) $(CFLAGS) $(HDINC) -c $< -o $@ \
+		-MMD -MF $(patsubst $(OBJDIR)/%,$(DEPDIR)/%,$(@:.o=.d))
+
+-include $(DEPS)
+
+clean :
+	@printf "Cleaning object files...\n"
+	@make -s clean -C $(LIBDIR)/libft/
+	@rm -rf $(OBJDIR)
+	@printf "$(GREEN)Done\n$(NC)"
+	@printf "Cleaning dependency files...\n"
+	@rm -rf $(DEPDIR)
+	@printf "$(GREEN)Done\n$(NC)"
+
+fclean : clean
+	@printf "Cleaning target files...\n"
+	@make -s fclean -C $(LIBDIR)/libft/
+	@rm -f $(TARGET)
+	@printf "$(GREEN)Done\n$(NC)"
+
+re : fclean all
+
+.PHONY : all debug clean fclean re

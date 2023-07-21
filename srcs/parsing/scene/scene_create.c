@@ -6,7 +6,7 @@
 /*   By: jopadova <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 14:53:10 by jopadova          #+#    #+#             */
-/*   Updated: 2023/07/21 14:40:17 by jopadova         ###   ########.fr       */
+/*   Updated: 2023/07/21 16:57:12 by jopadova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ int	scene_add_light(t_light *light, t_scene *scene)
 	new->intensity = light->intensity;
 	add_light(&scene->light_lst, new);
 	return (SUCCESS);
-
 }
 
 void	scene_add_ambiant(t_light *light, t_scene *scene)

@@ -6,7 +6,7 @@
 /*   By: jopadova <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 14:53:10 by jopadova          #+#    #+#             */
-/*   Updated: 2023/07/21 14:20:07 by jopadova         ###   ########.fr       */
+/*   Updated: 2023/07/21 16:56:49 by jopadova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 int	add_plane(t_p_object *plane, t_scene *scene)
 {
 	t_obj	*new;
-	t_vec		size;
+	t_vec	size;
 
 	new = plane_create();
 	if (!new)
@@ -50,11 +50,12 @@ int	add_cylinder(t_p_object *cylinder, t_scene *scene)
 	if (!new)
 		return (FAILURE);
 	new->gtfm = gtfm_set(cylinder->center,
-						 cylinder->direc,
-						 vec_create(cylinder->radius,
-							cylinder->radius,
-							cylinder->height)
-						);
+			cylinder->direc,
+			vec_create(cylinder->radius,
+				cylinder->radius,
+				cylinder->height
+				)
+			);
 	new->color = cylinder->color;
 	add_obj(&scene->obj_lst, new);
 	return (SUCCESS);

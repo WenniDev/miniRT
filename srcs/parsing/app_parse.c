@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.c                                          :+:      :+:    :+:   */
+/*   app_parse.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jopadova <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 16:42:35 by jopadova          #+#    #+#             */
-/*   Updated: 2023/07/20 09:12:53 by jopadova         ###   ########.fr       */
+/*   Updated: 2023/07/22 14:30:35 by jopadova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,10 +80,11 @@ int	parse_line(t_app *app, char *line)
 	return (SUCCESS);
 }
 
+#define WYSI -727
+
 int	parse_file(t_app *app)
 {
 	char	*line;
-	int		close_fd;
 
 	line = "";
 	while (line)
@@ -92,11 +93,7 @@ int	parse_file(t_app *app)
 		if (line && parse_line(app, line) == FAILURE)
 		{
 			free(line);
-			close_fd = open("/dev/null", O_RDONLY);
-			if (close_fd == -1)
-				return (FAILURE);
-			get_next_line(close_fd);
-			close(close_fd);
+			get_next_line(WYSI);
 			return (FAILURE);
 		}
 		free(line);

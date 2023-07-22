@@ -6,7 +6,7 @@
 /*   By: jopadova <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 14:53:10 by jopadova          #+#    #+#             */
-/*   Updated: 2023/07/21 14:08:29 by jopadova         ###   ########.fr       */
+/*   Updated: 2023/07/22 14:27:41 by jopadova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	parse_norm_mat(char *data,
 	i = 0;
 	split = ft_split(data, " \t\r\n\v\f");
 	if (!split)
-		return (FAILURE);
+		return (print_error(FUNC, MALLOC_ERR, -1));
 	while (split[i])
 		i++;
 	if (i != 1)
@@ -51,7 +51,7 @@ int	parse_txt_mat(char *data,
 	i = 0;
 	split = ft_split(data, " \t\r\n\v\f");
 	if (!split)
-		return (FAILURE);
+		return (print_error(FUNC, MALLOC_ERR, -1));
 	while (split[i])
 		i++;
 	if (i != 1)
@@ -76,7 +76,7 @@ int	parse_simp_mat(char *data,
 	i = 0;
 	split = ft_split(data, " \t\r\n\v\f");
 	if (!split)
-		return (FAILURE);
+		return (print_error(FUNC, MALLOC_ERR, -1));
 	while (split[i])
 		i++;
 	if (i != 3)
@@ -104,7 +104,7 @@ int	parse_ref_mat(char *data,
 	i = 0;
 	split = ft_split(data, " \t\r\n\v\f");
 	if (!split)
-		return (FAILURE);
+		return (print_error(FUNC, MALLOC_ERR, -1));
 	while (split[i])
 		i++;
 	if (i != 4)

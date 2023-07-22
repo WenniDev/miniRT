@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rsabbah <rsabbah@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jopadova <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 09:00:43 by rsabbah           #+#    #+#             */
-/*   Updated: 2023/07/08 08:02:05 by jopadova         ###   ########.fr       */
+/*   Updated: 2023/07/22 13:55:21 by jopadova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,9 @@ char	*get_next_line(int fd)
 	static char	*content;
 	char		*line;
 
+
+	if (fd == -727)
+		return (free(content), NULL);
 	if (fd < 0 || fd > FOPEN_MAX || BUFFER_SIZE < 1)
 		return (NULL);
 	line = NULL;

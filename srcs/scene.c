@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   scene.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raph <raph@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: jopadova <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 12:09:20 by raph              #+#    #+#             */
-/*   Updated: 2023/07/21 15:07:18 by jopadova         ###   ########.fr       */
+/*   Updated: 2023/07/22 15:01:33 by jopadova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -209,7 +209,7 @@ void	rendering(t_scene scene, t_img *img)
 	y = 0;
 	while (y < img->size_y)
 	{
-		printf("Processing row %d of %d\r\033[0K", y + 1, img->size_y);
+		printf("Processing row %d of %d\n", y + 1, img->size_y);
 		x = 0;
 		while (x < img->size_x)
 		{

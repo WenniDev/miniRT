@@ -6,7 +6,7 @@
 /*   By: jopadova <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 14:53:10 by jopadova          #+#    #+#             */
-/*   Updated: 2023/07/21 13:59:31 by jopadova         ###   ########.fr       */
+/*   Updated: 2023/07/22 14:30:29 by jopadova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,11 @@ int	parse_ambient(char *data,
 	static bool	amb_init = false;
 
 	if (amb_init == true)
-		return (FAILURE);
+		return (print_error(FUNC, MULTI_AMB, -1));
 	amb_init = true;
 	split = ft_split(data, " \t\r\n\v\f");
 	if (!split)
-		return (FAILURE);
+		return (print_error(FUNC, MALLOC_ERR, -1));
 	if (check_nb_value(split, 2) == FAILURE)
 		return (ft_split_free(split), FAILURE);
 	if (parse_double(split[0], &light.intensity) == FAILURE)
@@ -51,11 +51,11 @@ int	parse_camera(char *data,
 	static bool	cam_init = false;
 
 	if (cam_init == true)
-		return (FAILURE);
+		return (print_error(FUNC, MULTI_CAM, -1));
 	cam_init = true;
 	split = ft_split(data, " \t\r\n\v\f");
 	if (!split)
-		return (FAILURE);
+		return (print_error(FUNC, MALLOC_ERR, -1));
 	if (check_nb_value(split, 4) == FAILURE)
 		return (ft_split_free(split), FAILURE);
 	if (parse_vec(split[0], &cam.pos) == FAILURE)
@@ -83,7 +83,7 @@ int	parse_light(char *data,
 
 	split = ft_split(data, " \t\r\n\v\f");
 	if (!split)
-		return (FAILURE);
+		return (print_error(FUNC, MALLOC_ERR, -1));
 	if (check_nb_value(split, 3) == FAILURE)
 		return (ft_split_free(split), FAILURE);
 	if (parse_vec(split[0], &light.pos) == FAILURE)

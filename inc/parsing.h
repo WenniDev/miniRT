@@ -6,7 +6,7 @@
 /*   By: jopadova <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 17:57:20 by jopadova          #+#    #+#             */
-/*   Updated: 2023/07/21 13:57:29 by jopadova         ###   ########.fr       */
+/*   Updated: 2023/07/22 14:29:44 by jopadova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,13 @@
 
 # define WRNG_RGB "Wrong RGB value"
 # define WRNG_VEC "Wrong vector value"
-# define WRNG_VEC_VAL "Too many values"
+# define WRNG_VEC_VAL "Wrong number of values"
 # define WRNG_DOUBLE "Wrong double value"
 
 # define MALLOC_ERR "Malloc error"
+
+# define MULTI_AMB "Multiple ambient light"
+# define MULTI_CAM "Multiple camera"
 
 # define PARSE_ERR "Parsing error"
 # define UNKW_ID "Unknown identifier"

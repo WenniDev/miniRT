@@ -6,7 +6,7 @@
 /*   By: jopadova <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 17:47:51 by jopadova          #+#    #+#             */
-/*   Updated: 2023/07/19 13:53:09 by jopadova         ###   ########.fr       */
+/*   Updated: 2023/07/22 14:27:50 by jopadova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	parse_obj(char *data,
 	set_parse_step(parse, &obj);
 	split = ft_split(data, " \t\r\n\v\f");
 	if (!split)
-		return (FAILURE);
+		return (print_error(FUNC, MALLOC_ERR, -1));
 	if (check_nb_value(split, get_nb_data(parse)) == FAILURE)
 		return (ft_split_free(split), FAILURE);
 	i = 0;
